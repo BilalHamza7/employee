@@ -58,10 +58,4 @@ public class SellerController {
 
         return "Good";
     }
-
-//    @GetMapping(path = "/sellerDetails")
-//    public List<Seller> getSellerDetails()
-//    {
-//        return List<Seller>;
-//    }
 }
