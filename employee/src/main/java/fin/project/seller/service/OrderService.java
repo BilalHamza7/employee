@@ -13,7 +13,7 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    public List<Order> getOrderDetails()
-    {   return orderRepository.findAll();
+    public List<Order> getOrder()    {
+        return orderRepository.findAll();
     }
 }

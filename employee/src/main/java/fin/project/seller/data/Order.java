@@ -15,17 +15,20 @@ public class Order {
     @Column(name = "customer_name")
     private String customerName;
 
-    @Column(name = "address")
-    private String address;
-
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "order_date")
-    private Date orderDate;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "quantity")
+    private int quantity;
 
     @Column(name = "price")
-    private Float price;
+    private float price;
+
+    @Column(name = "order_date")
+    private Date orderDate;
 
     @Column(name = "status")
     private String status;
@@ -46,14 +49,6 @@ public class Order {
         this.customerName = customerName;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getProductName() {
         return productName;
     }
@@ -62,20 +57,36 @@ public class Order {
         this.productName = productName;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
     public Date getOrderDate() {
         return orderDate;
     }
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
     }
 
     public String getStatus() {

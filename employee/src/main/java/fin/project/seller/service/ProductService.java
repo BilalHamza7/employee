@@ -1,10 +1,12 @@
 package fin.project.seller.service;
 
+import fin.project.seller.data.Product;
 import fin.project.seller.data.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.io.*;
 import java.nio.file.Files;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -12,12 +14,11 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    private String imageDirectory = "D:/NIBM//Crafts-Of-Ceylonzip/src/images/products";
+    private String imageTargetDirectory = "D:/NIBM/Crafts-Of-Ceylonzip/public/loadimages"; //change path
 
-    private String imageTargetDirectory = "D:\\NIBM\\Crafts-Of-Ceylonzip\\public\\loadimages"; //change path
-
-    public void copyImage(String sourcePath) throws IOException {
+    public String copyImage(Product product) throws IOException {
         // Extracting file name from the path
+        String sourcePath = product.getFilePath(); // Assuming there is a getFilePath() method in your Product class
         String fileName = sourcePath.substring(sourcePath.lastIndexOf("\\") + 1);
 
         // Target file (new image path)
@@ -25,5 +26,39 @@ public class ProductService {
 
         // Copy the image file to the target directory
         Files.copy(new File(sourcePath).toPath(), targetFile.toPath());
+
+        productRepository.save(product);
+
+        return "Good";
     }
+
+    public List<Product> getProduct() {
+        return productRepository.findAll();
+    }
+
+
+//    public void createProduct(Product product) throws IOException {
+//        // Assuming image path is provided in the request
+//        String imagePath = product.getFilePath();
+//
+//        // Extracting file name from the path
+//        String fileName = imagePath.substring(imagePath.lastIndexOf("\\") + 1);
+//
+//        // Target file (new image path)
+//        File targetFile = new File(imageTargetDirectory, fileName);
+//
+//        // Save product details with the provided file path
+//        Product newProduct = Product.builder()
+//                .name(product.getName())
+//                .category(product.getCategory())
+//                .description(product.getDescription())
+//                .price(product.getPrice())
+//                .weight(product.getWeight())
+//                .filePath(targetFile.getAbsolutePath())
+//                .build();
+//
+//        // Save the product to the database
+//        productRepository.save(newProduct);
+//    }
+
 }

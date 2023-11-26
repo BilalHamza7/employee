@@ -1,47 +1,64 @@
 package fin.project.seller.data;
 
 import jakarta.persistence.*;
+//import jakarta.persistence.*;
+//import lombok.AllArgsConstructor;
+//import lombok.Builder;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "product")
-public class Product {
+//@Data
+//@Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
 
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "product_name")
-    private String productName;
+    @Column(name = "Name")
+    private String name;
 
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "category")
+    @Column(name = "Category")
     private String category;
 
+    @Column(name = "Description")
+    private String description;
+
     @Column(name = "price")
-    private Float price;
+    private float price;
 
     @Column(name = "weight")
-    private Float weight;
+    private float weight;
+    @Column(name = "filePath")
+    private String filePath;
 
-    @Column(name = "file_path")
-    private String path;
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDescription() {
@@ -52,31 +69,27 @@ public class Product {
         this.description = description;
     }
 
-    public String getCategory() {return category;}
-
-    public void setCategory(String category) {this.category = category;}
-
-    public Float getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
-    public Float getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(Float weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
-    public String getPath() {
-        return path;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }
