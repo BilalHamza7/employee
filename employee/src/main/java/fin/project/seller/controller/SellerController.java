@@ -1,6 +1,7 @@
 package fin.project.seller.controller;
 
 import fin.project.seller.data.Order;
+import fin.project.seller.data.Product;
 import fin.project.seller.data.Seller;
 import fin.project.seller.data.SellerLogin;
 import fin.project.seller.service.OrderService;
@@ -50,20 +51,12 @@ public class SellerController {
         }
     }
 
-    @PostMapping(path = "/product/createProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> createProduct(@RequestPart("file") MultipartFile file,
-                                                @RequestPart("name") String name,
-                                                @RequestPart("description") String description,
-                                                @RequestPart("category") String category,
-                                                @RequestPart("price") float price,
-                                                @RequestPart("weight") float weight) throws IOException {
-        if(file.isEmpty())
-        {
-            return ResponseEntity.badRequest().body("please select an image");
-        }
-        else {
-            return productService.createProduct(file, name, description, category, price, weight);
-        }
+    @PostMapping("/product/createProduct")
+    public String saveProduct(@RequestBody Product product) throws IOException {
+//        productService.createProduct(product); // Save product details
+        productService.copyImage(product.getPath()); // Copy image to target directory
+
+        return "Good";
     }
 
 //    @GetMapping(path = "/sellerDetails")
