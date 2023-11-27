@@ -12,7 +12,7 @@ public class SellerService {
     @Autowired
     SellerRepository sellerRepository;
 
-    public Seller createSeller(Seller customer)    {
-        return sellerRepository.save(customer);
+    public Seller createSeller(Seller seller)    {
+        return sellerRepository.save(seller);
     }
 }

@@ -32,7 +32,7 @@ public class SellerController {
     SellerLoginService sellerLoginService;
 
     @PostMapping("/seller/createSeller")
-    public Seller createCustomer(@RequestBody Seller seller){
+    public Seller createSeller(@RequestBody Seller seller){
         return sellerService.createSeller(seller);
     }
 
@@ -53,15 +53,13 @@ public class SellerController {
 
     @PostMapping("/product/createProduct")
     public String saveProduct(@RequestBody Product product) throws IOException {
-//        productService.createProduct(product); // Save product details
-        productService.copyImage(product); // Copy image to target directory
-
+        productService.copyImage(product);
         return "Good";
     }
 
-    @GetMapping("/product/getProduct")
-    public List<Product> getProduct(){
-        return productService.getProduct();
+    @GetMapping("/product/getProduct/{category}")
+    public List<Product> getProductFromCategory(@PathVariable String category){
+        return productService.getProductByCategory(category);
     }
 
     @GetMapping("/order/getOrder")
@@ -69,4 +67,9 @@ public class SellerController {
         return orderService.getOrder();
     }
 
+    @PostMapping("/order/createOrder")
+    public Order createOrder(@RequestBody Order order)
+    {
+        return orderService.createOrder(order);
+    }
 }

@@ -1,32 +1,23 @@
 package fin.project.seller.data;
 
 import jakarta.persistence.*;
-//import jakarta.persistence.*;
-//import lombok.AllArgsConstructor;
-//import lombok.Builder;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table(name = "product")
-//@Data
-//@Builder
-//@AllArgsConstructor
-//@NoArgsConstructor
 
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column(name = "Name")
+    @Column(name = "product_name")
     private String name;
 
-    @Column(name = "Category")
+    @Column(name = "description")
     private String category;
 
-    @Column(name = "Description")
+    @Column(name = "category")
     private String description;
 
     @Column(name = "price")
@@ -34,14 +25,14 @@ public class Product {
 
     @Column(name = "weight")
     private float weight;
-    @Column(name = "filePath")
+    @Column(name = "file_path")
     private String filePath;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

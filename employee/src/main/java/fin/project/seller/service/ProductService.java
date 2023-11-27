@@ -19,10 +19,12 @@ public class ProductService {
     public String copyImage(Product product) throws IOException {
         // Extracting file name from the path
         String sourcePath = product.getFilePath(); // Assuming there is a getFilePath() method in your Product class
-        String fileName = sourcePath.substring(sourcePath.lastIndexOf("\\") + 1);
+        String fileNameWithExtension = sourcePath.substring(sourcePath.lastIndexOf("\\") + 1);
+        String fileName = fileNameWithExtension.substring(0, fileNameWithExtension.lastIndexOf("."));
+        product.setFilePath(fileName);
 
         // Target file (new image path)
-        File targetFile = new File(imageTargetDirectory, fileName);
+        File targetFile = new File(imageTargetDirectory, fileNameWithExtension);
 
         // Copy the image file to the target directory
         Files.copy(new File(sourcePath).toPath(), targetFile.toPath());
@@ -32,8 +34,14 @@ public class ProductService {
         return "Good";
     }
 
+
+
     public List<Product> getProduct() {
         return productRepository.findAll();
+    }
+
+    public List<Product> getProductByCategory(String category) {
+        return productRepository.findByCategory(category);
     }
 
 
