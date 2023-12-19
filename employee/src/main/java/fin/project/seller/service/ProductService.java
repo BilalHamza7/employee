@@ -44,6 +44,10 @@ public class ProductService {
         return productRepository.findByCategory(category);
     }
 
+    public List<Product> getSellerProduct(int selId) {
+        return productRepository.findBySelId(selId);
+    }
+
 
 //    public void createProduct(Product product) throws IOException {
 //        // Assuming image path is provided in the request

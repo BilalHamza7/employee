@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -39,20 +40,25 @@ public class SellerController {
     @PostMapping("/seller/recordCredentials")
     public int recordCredentials(@RequestBody SellerLogin createLogin){
         return sellerLoginService.recordCredentials(createLogin);
-
     }
 
     @PostMapping("/seller/verifySeller")
-    public boolean verifySeller(@RequestParam String username,@RequestParam String password) {
-        if (sellerLoginService.verifySeller(username, password)) {
-            return true;
-        } else {
-            return false;
-        }
+    public Optional<SellerLogin> verifySeller(@RequestBody SellerLogin credentials) {
+        return sellerLoginService.verifySeller(credentials.getUsername(), credentials.getPassword());
+    }
+
+    @GetMapping("/seller/getSeller")
+    public Optional<Seller> getSeller(@RequestParam int id){
+        return sellerService.getSeller(id);
+    }
+
+    @GetMapping("/seller/getSellerLogin")
+    public Optional<SellerLogin> getCustomerLogin(@RequestParam int id){
+        return sellerLoginService.getSellerLogin(id);
     }
 
     @PostMapping("/product/createProduct")
-    public String saveProduct(@RequestBody Product product) throws IOException {
+    public String createProduct(@RequestBody Product product) throws IOException {
         productService.copyImage(product);
         return "Good";
     }
@@ -60,6 +66,11 @@ public class SellerController {
     @GetMapping("/product/getProduct/{category}")
     public List<Product> getProductFromCategory(@PathVariable String category){
         return productService.getProductByCategory(category);
+    }
+
+    @GetMapping("/product/getMyProduct/{selId}")
+    public List<Product> getSellerProduct(@PathVariable int selId){
+        return productService.getSellerProduct(selId);
     }
 
     @GetMapping("/order/getOrder")

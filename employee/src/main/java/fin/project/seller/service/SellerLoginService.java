@@ -12,14 +12,17 @@ public class SellerLoginService {
     @Autowired
     SellerLoginRepository sellerLoginRepository;
 
-    public boolean verifySeller(String username, String password)
+    public Optional<SellerLogin> verifySeller(String username, String password)
     {
-        Optional<SellerLogin> sellerLogin = sellerLoginRepository.findByUsernameAndPassword(username, password);
-        return sellerLogin.isPresent();
+        return sellerLoginRepository.findByUsernameAndPassword(username, password);
     }
 
     public int recordCredentials(SellerLogin createLogin) {
         var result = sellerLoginRepository.save(createLogin);
         return result.getId();
+    }
+
+    public Optional<SellerLogin> getSellerLogin(int id) {
+        return sellerLoginRepository.findById(id);
     }
 }
